@@ -13,13 +13,12 @@ const StudioList = () => {
 
   return (
     <div className="flex flex-auto w-full gap-8">
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-2 gap-12">
         {data.map((v, i) => {
           if (i !== data.length - 1) {
             return (
               <>
                 <CardStudios studio={data[i]} />
-                <Divider />
               </>
             );
           } else {
