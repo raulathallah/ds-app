@@ -1,3 +1,5 @@
+"use client";
+import { primaryColor } from "@/app/_lib/color";
 import {
   Button,
   Navbar,
@@ -6,8 +8,10 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NavigationBar = () => {
+  const pathname = usePathname();
   return (
     <>
       <Navbar position="static" shouldHideOnScroll>
@@ -17,7 +21,12 @@ const NavigationBar = () => {
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-12" justify="center">
-          <NavbarItem>
+          <NavbarItem
+            isActive={pathname === "/studio"}
+            style={{
+              color: pathname === "/studio" ? primaryColor : "black",
+            }}
+          >
             <Link color="foreground" href="/studio">
               Studio
             </Link>

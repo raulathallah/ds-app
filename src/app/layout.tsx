@@ -27,7 +27,7 @@ export default function RootLayout({
           <NavigationBar></NavigationBar>
         </header>
         <Providers>
-          <div className="p-4">{children}</div>
+          <div className="mt-10 px-24">{children}</div>
         </Providers>
       </body>
     </html>

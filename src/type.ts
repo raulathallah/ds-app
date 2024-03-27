@@ -4,12 +4,12 @@ export type Studio = {
   address: string;
   city: string;
   phone: string;
-  socialmedia: StudioSocialMedia;
-  image: string;
+  isAC: boolean;
+  isSpeaker: boolean;
+  isRGB: boolean;
+  isProperties: boolean;
+  instagram: string;
+  image: string[];
   logo: string;
   rent: number;
-};
-
-type StudioSocialMedia = {
-  instagram: string;
 };

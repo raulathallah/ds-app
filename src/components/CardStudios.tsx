@@ -14,16 +14,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBox,
   faLightbulb,
+  faLocationDot,
   faMusic,
   faSnowflake,
 } from "@fortawesome/free-solid-svg-icons";
 
+import currencyFormat from "../app/_lib/format";
 type StudioListItem = {
   studio: Studio;
 };
-
-import currencyFormat from "../app/_lib/format";
-
 const CardStudios = ({ studio }: StudioListItem) => {
   return (
     <div>
@@ -39,87 +38,47 @@ const CardStudios = ({ studio }: StudioListItem) => {
             shadow="sm"
             radius="lg"
             width="100%"
-            alt={studio.image}
+            alt={studio.image[0]}
             className="object-cover"
             style={{ height: 250, aspectRatio: 2 }}
-            src={studio.image}
+            src={studio.image[0]}
           />
-          <CardBody className="gap-2">
+          <CardBody className="gap-3">
             <p className="text-2xl font-bold ">{studio.name}</p>
             <p className="text-lg font-bold">
               {currencyFormat(studio.rent)}/hour
             </p>
+            <div className="text-sm flex gap-2">
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                fontSize={18}
+                color="black"
+              ></FontAwesomeIcon>
+              <p>{studio.address}</p>
+            </div>
 
-            <p className="text-sm">{studio.address}</p>
-            <p className="text-sm font-semibold">Facilities</p>
-            <div className="grid grid-cols-2 gap-1 w-[50%]">
-              <Chip
-                startContent={
-                  <FontAwesomeIcon
-                    icon={faSnowflake}
-                    fontSize={18}
-                    color="grey"
-                  />
-                }
-                size="sm"
-                classNames={{
-                  base: "bg-transparent",
-                  content: "text-black",
-                }}
-                color="primary"
-                className="gap-1 p-3"
-              >
-                AC
-              </Chip>
-              <Chip
-                startContent={
-                  <FontAwesomeIcon icon={faMusic} fontSize={18} color="grey" />
-                }
-                variant="flat"
-                color="secondary"
-                size="sm"
-                classNames={{
-                  base: "bg-transparent",
-                  content: "text-black",
-                }}
-                className="gap-1 p-3"
-              >
-                Speaker
-              </Chip>
-              <Chip
-                startContent={
-                  <FontAwesomeIcon
-                    icon={faLightbulb}
-                    fontSize={18}
-                    color="grey"
-                  />
-                }
-                variant="flat"
-                color="secondary"
-                size="sm"
-                classNames={{
-                  base: "bg-transparent",
-                  content: "text-black",
-                }}
-                className="gap-1 p-3"
-              >
-                RGB Light
-              </Chip>
-              <Chip
-                startContent={
-                  <FontAwesomeIcon icon={faBox} fontSize={18} color="grey" />
-                }
-                variant="flat"
-                color="secondary"
-                size="sm"
-                classNames={{
-                  base: "bg-transparent",
-                  content: "text-black",
-                }}
-                className="gap-1 p-3"
-              >
-                Properties
-              </Chip>
+            <div className="grid grid-cols-1">
+              <p className="text-sm font-semibold">Facilities</p>
+              {studio.isAC && (
+                <Chip variant="light" color="secondary" size="sm">
+                  AC
+                </Chip>
+              )}
+              {studio.isSpeaker && (
+                <Chip variant="light" color="secondary" size="sm">
+                  Speaker
+                </Chip>
+              )}
+              {studio.isRGB && (
+                <Chip variant="light" color="secondary" size="sm">
+                  RGB Light
+                </Chip>
+              )}
+              {studio.isProperties && (
+                <Chip variant="light" color="secondary" size="sm">
+                  Properties
+                </Chip>
+              )}
             </div>
           </CardBody>
         </Card>

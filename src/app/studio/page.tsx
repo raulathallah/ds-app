@@ -1,32 +1,27 @@
 "use client";
-import Studios from "@/assets/data/studios";
 import CardStudios from "@/components/CardStudios";
-import CardStudiosDetail from "@/components/CardStudiosDetail";
-import { Studio } from "@/type";
-import { Button, Card, Divider, Image } from "@nextui-org/react";
-import { useState } from "react";
+import { getStudios } from "@/redux/slices/studio-slice";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const StudioList = () => {
-  const data = Studios;
-
-  const [preview, setPreview] = useState<Studio>();
-
+  const dispatch = useDispatch<AppDispatch>();
+  const { data } = useSelector((state: RootState) => state.studios);
+  useEffect(() => {
+    dispatch(getStudios());
+  }, []);
   return (
     <div className="flex flex-auto w-full gap-8">
       <div className="grid grid-cols-2 gap-12">
         {data.map((v, i) => {
-          if (i !== data.length - 1) {
-            return (
-              <>
-                <CardStudios studio={data[i]} />
-              </>
-            );
-          } else {
-            return <CardStudios studio={data[i]} />;
-          }
+          return (
+            <>
+              <CardStudios studio={data[i]} />
+            </>
+          );
         })}
       </div>
-      <div></div>
     </div>
   );
 };
