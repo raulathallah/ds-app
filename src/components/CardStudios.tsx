@@ -14,15 +14,14 @@ const CardStudios = ({ studio }: StudioListItem) => {
     <div>
       <Link href={`/studio/${studio.id}`}>
         <Card
-          shadow="none"
+          shadow="sm"
           key={studio.id}
           isPressable
           style={{ border: "none" }}
-          className="grid grid-cols-2 p-2"
+          className="grid grid-cols-2"
         >
           <Image
-            shadow="sm"
-            radius="lg"
+            radius="none"
             width="100%"
             alt={studio.image[0]}
             className="object-cover"
@@ -34,24 +33,46 @@ const CardStudios = ({ studio }: StudioListItem) => {
             <TextCustom
               text={currencyFormat(studio.rent) + "/hour"}
               type="label-md"
+              color="green"
             />
 
             <div className="text-sm flex gap-2">
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                fontSize={18}
-                color="black"
-              ></FontAwesomeIcon>
-              <TextCustom text={studio.address} type="label-sm" />
+              <TextCustom text={studio.address} type="" />
             </div>
             <Divider />
             <TextCustom text="Facilities:" type="" />
             <div className="grid grid-cols-2 gap-1">
-              {studio.isAC && <ChipCustom size="sm" text="AC" />}
-              {studio.isSpeaker && <ChipCustom size="sm" text="Speaker" />}
-              {studio.isRGB && <ChipCustom size="sm" text="RGB Light" />}
+              {studio.isAC && (
+                <ChipCustom
+                  size="sm"
+                  text="Air Conditioner"
+                  variant="dot"
+                  color="secondary"
+                />
+              )}
+              {studio.isSpeaker && (
+                <ChipCustom
+                  size="sm"
+                  text="Speaker"
+                  variant="dot"
+                  color="secondary"
+                />
+              )}
+              {studio.isRGB && (
+                <ChipCustom
+                  size="sm"
+                  text="RGB Light"
+                  variant="dot"
+                  color="secondary"
+                />
+              )}
               {studio.isProperties && (
-                <ChipCustom size="sm" text="Properties" />
+                <ChipCustom
+                  size="sm"
+                  text="Properties"
+                  variant="dot"
+                  color="secondary"
+                />
               )}
             </div>
           </CardBody>

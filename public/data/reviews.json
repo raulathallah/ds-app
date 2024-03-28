@@ -1,0 +1,30 @@
+[
+  {
+    "id": "RV0001",
+    "studioId": 1,
+    "username": "Ninette Cécile",
+    "reviews": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "rating": "4.7"
+  },
+  {
+    "id": "RV0002",
+    "studioId": 1,
+    "username": "Imani Imke",
+    "reviews": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non enim et diam dapibus hendrerit quis non ipsum. Proin efficitur auctor ultrices. Sed et ullamcorper dui.",
+    "rating": "4.6"
+  },
+  {
+    "id": "RV0003",
+    "studioId": 2,
+    "username": "Sroel Edvard",
+    "reviews": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non enim et diam dapibus hendrerit quis non ipsum.",
+    "rating": "4.4"
+  },
+  {
+    "id": "RV0004",
+    "studioId": 1,
+    "username": "Gemini Qillaq",
+    "reviews": "Lorem ipsum dolor sit amet!",
+    "rating": "4.6"
+  }
+]

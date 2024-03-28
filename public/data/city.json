@@ -1,0 +1,22 @@
+[
+  {
+    "cityId": "CTY0001",
+    "cityName": "Jakarta Pusat"
+  },
+  {
+    "cityId": "CTY0002",
+    "cityName": "Jakarta Selatan"
+  },
+  {
+    "cityId": "CTY0003",
+    "cityName": "Jakarta Barat"
+  },
+  {
+    "cityId": "CTY0004",
+    "cityName": "Jakarta Utara"
+  },
+  {
+    "cityId": "CTY0005",
+    "cityName": "Jakarta Timur"
+  }
+]

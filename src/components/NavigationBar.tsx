@@ -1,5 +1,5 @@
 "use client";
-import { primaryColor } from "@/app/_lib/color";
+import { blackColor, primaryColor } from "@/app/_lib/color";
 import {
   Button,
   Navbar,
@@ -13,18 +13,18 @@ import { usePathname } from "next/navigation";
 const NavigationBar = () => {
   const pathname = usePathname();
   return (
-    <>
-      <Navbar position="static" shouldHideOnScroll>
+    <div>
+      <Navbar position="static" shouldHideOnScroll isBordered>
         <NavbarBrand>
           <Link color="foreground" href="/">
-            <p className="font-bold text-inherit">D.Space</p>
+            <p className="font-bold text-inherit text-xl">D.Space</p>
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-12" justify="center">
           <NavbarItem
-            isActive={pathname === "/studio"}
+            isActive={pathname.includes("/studio")}
             style={{
-              color: pathname === "/studio" ? primaryColor : "black",
+              color: pathname.includes("/studio") ? primaryColor : "black",
             }}
           >
             <Link color="foreground" href="/studio">
@@ -51,7 +51,7 @@ const NavigationBar = () => {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-    </>
+    </div>
   );
 };
 

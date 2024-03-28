@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import studioService from "../services/studio-services";
-import { Studio } from "@/type";
 
 type StudioState = {
   id: number;
   name: string;
   address: string;
-  city: string;
+  cityId: string;
   phone: string;
   instagram: string;
   image: string[];

@@ -2,7 +2,7 @@ export type Studio = {
   id: number;
   name: string;
   address: string;
-  city: string;
+  cityId: string;
   phone: string;
   isAC: boolean;
   isSpeaker: boolean;
@@ -12,4 +12,12 @@ export type Studio = {
   image: string[];
   logo: string;
   rent: number;
+};
+
+export type Review = {
+  id: string;
+  studioId: number;
+  username: string;
+  reviews: string;
+  rating: string;
 };
