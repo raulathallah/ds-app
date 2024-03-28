@@ -1,6 +1,25 @@
 [
   {
     "id": 1,
+    "name": "Spin Studio",
+    "address": "Psr Jatinegara Bl BKS/30, Jakarta Timur",
+    "city": "Jakarta Timur",
+    "phone": "0-21-856-6967",
+    "instagram": "@spin.studio",
+    "isAC": true,
+    "isSpeaker": true,
+    "isRGB": false,
+    "isProperties": true,
+    "image": [
+      "https://i.ibb.co/HqHk2sx/tommy-kwak-Ta3-Oh-YMKCv-A-unsplash.jpg",
+      "https://i.ibb.co/dJt8gkh/tommy-kwak-w4-Fpzc-Rkm-Nc-unsplash.jpg",
+      "https://i.ibb.co/QdtrPFf/tommy-kwak-8nqr-O4r-AMw-Q-unsplash.jpg"
+    ],
+    "logo": "",
+    "rent": 185000
+  },
+  {
+    "id": 2,
     "name": "Next Studio",
     "address": "Jl Tebet Raya 4 Perk Tebet Mas Indah, Jakarta Pusat",
     "city": "Jakarta Pusat",
@@ -14,8 +33,9 @@
     "logo": "",
     "rent": 150000
   },
+
   {
-    "id": 2,
+    "id": 3,
     "name": "Upvote Studio",
     "address": "Jl Tmn Rawa Pening I 14, Jakarta Selatan",
     "city": "Jakarta Selatan",
@@ -30,7 +50,7 @@
     "rent": 100000
   },
   {
-    "id": 3,
+    "id": 4,
     "name": "Wind Space",
     "address": "JL Danau Sunter Utara Blok R/55, Tanjung Priok",
     "city": "Jakarta Utara",
@@ -43,20 +63,5 @@
     "image": ["https://i.ibb.co/Jm3jWrX/studio-3.jpg"],
     "logo": "",
     "rent": 125000
-  },
-  {
-    "id": 4,
-    "name": "Spin Studio",
-    "address": "Psr Jatinegara Bl BKS/30, Jakarta Timur",
-    "city": "Jakarta Timur",
-    "phone": "0-21-856-6967",
-    "instagram": "@spin.studio",
-    "isAC": true,
-    "isSpeaker": true,
-    "isRGB": false,
-    "isProperties": true,
-    "image": ["https://i.ibb.co/VJRSb2R/studio-4.jpg"],
-    "logo": "",
-    "rent": 175000
   }
 ]

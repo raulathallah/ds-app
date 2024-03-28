@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import studioService from "../services/studio-services";
+import { Studio } from "@/type";
 
 type StudioState = {
   id: number;
@@ -18,9 +19,11 @@ type StudioState = {
 };
 type InitialState = {
   data: StudioState[];
+  detail: StudioState | null;
 };
 const initialState = {
   data: [],
+  detail: null,
 } as InitialState;
 
 export const getStudios = createAsyncThunk(
@@ -28,6 +31,17 @@ export const getStudios = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const data = await studioService.getStudios();
+      return data;
+    } catch (error) {
+      throw new Error("ERROR STUDIO SLICE");
+    }
+  }
+);
+export const getStudioDetail = createAsyncThunk(
+  "STUDIO_DETAIL",
+  async (id: string, thunkAPI) => {
+    try {
+      const data = await studioService.getStudioDetail(id);
       return data;
     } catch (error) {
       throw new Error("ERROR STUDIO SLICE");
@@ -48,6 +62,15 @@ export const studioSlice = createSlice({
     });
     builder.addCase(getStudios.rejected, (state, action) => {
       state.data = [];
+    });
+    builder.addCase(getStudioDetail.fulfilled, (state, action) => {
+      state.detail = action.payload;
+    });
+    builder.addCase(getStudioDetail.pending, (state, action) => {
+      state.detail = null;
+    });
+    builder.addCase(getStudioDetail.rejected, (state, action) => {
+      state.detail = null;
     });
   },
 });

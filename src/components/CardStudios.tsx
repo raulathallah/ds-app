@@ -1,25 +1,11 @@
 import { Studio } from "@/type";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-  Divider,
-  Image,
-  Link,
-} from "@nextui-org/react";
-
+import { Card, CardBody, Chip, Divider, Image, Link } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBox,
-  faLightbulb,
-  faLocationDot,
-  faMusic,
-  faSnowflake,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import currencyFormat from "../app/_lib/format";
+import TextCustom from "./Text";
+import ChipCustom from "./Chip";
 type StudioListItem = {
   studio: Studio;
 };
@@ -43,41 +29,29 @@ const CardStudios = ({ studio }: StudioListItem) => {
             style={{ height: 250, aspectRatio: 2 }}
             src={studio.image[0]}
           />
-          <CardBody className="gap-3">
-            <p className="text-2xl font-bold ">{studio.name}</p>
-            <p className="text-lg font-bold">
-              {currencyFormat(studio.rent)}/hour
-            </p>
+          <CardBody className="gap-2">
+            <TextCustom text={studio.name} type="label-lg" />
+            <TextCustom
+              text={currencyFormat(studio.rent) + "/hour"}
+              type="label-md"
+            />
+
             <div className="text-sm flex gap-2">
               <FontAwesomeIcon
                 icon={faLocationDot}
                 fontSize={18}
                 color="black"
               ></FontAwesomeIcon>
-              <p>{studio.address}</p>
+              <TextCustom text={studio.address} type="label-sm" />
             </div>
-
-            <div className="grid grid-cols-1">
-              <p className="text-sm font-semibold">Facilities</p>
-              {studio.isAC && (
-                <Chip variant="light" color="secondary" size="sm">
-                  AC
-                </Chip>
-              )}
-              {studio.isSpeaker && (
-                <Chip variant="light" color="secondary" size="sm">
-                  Speaker
-                </Chip>
-              )}
-              {studio.isRGB && (
-                <Chip variant="light" color="secondary" size="sm">
-                  RGB Light
-                </Chip>
-              )}
+            <Divider />
+            <TextCustom text="Facilities:" type="" />
+            <div className="grid grid-cols-2 gap-1">
+              {studio.isAC && <ChipCustom size="sm" text="AC" />}
+              {studio.isSpeaker && <ChipCustom size="sm" text="Speaker" />}
+              {studio.isRGB && <ChipCustom size="sm" text="RGB Light" />}
               {studio.isProperties && (
-                <Chip variant="light" color="secondary" size="sm">
-                  Properties
-                </Chip>
+                <ChipCustom size="sm" text="Properties" />
               )}
             </div>
           </CardBody>
