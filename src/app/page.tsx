@@ -1,5 +1,8 @@
-import Image from "next/image";
-
 export default function Home() {
-  return <>DASHBOARD</>;
+  return (
+    <div>
+      <div>INTRO</div>
+      <div>MY FAVORITE</div>
+    </div>
+  );
 }

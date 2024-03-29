@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavigationBar from "@/components/NavigationBar";
+import BackButton from "@/components/BackButton";
+import { useParams } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +29,7 @@ export default function RootLayout({
           <NavigationBar></NavigationBar>
         </header>
         <Providers>
-          <div className="mt-10 px-24">{children}</div>
+          <div className="mt-4 px-72">{children}</div>
         </Providers>
       </body>
     </html>

@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import studiosReducer from "../redux/slices/studio-slice";
 import locationReducer from "../redux/slices/location-slice";
 import reviewReducer from "../redux/slices/review-services";
+import authReducer from "../redux/slices/auth-services";
 
 const reducer = {
   studios: studiosReducer,
   location: locationReducer,
   review: reviewReducer,
+  auth: authReducer,
 };
 export const store = configureStore({
   reducer: reducer,

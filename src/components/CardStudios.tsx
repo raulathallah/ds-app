@@ -1,11 +1,12 @@
 import { Studio } from "@/type";
 import { Card, CardBody, Chip, Divider, Image, Link } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 import currencyFormat from "../app/_lib/format";
 import TextCustom from "./Text";
 import ChipCustom from "./Chip";
+import { blackColor, goldColor } from "@/app/_lib/color";
 type StudioListItem = {
   studio: Studio;
 };
@@ -16,7 +17,6 @@ const CardStudios = ({ studio }: StudioListItem) => {
         <Card
           shadow="sm"
           key={studio.id}
-          isPressable
           style={{ border: "none" }}
           className="grid grid-cols-2"
         >
@@ -29,7 +29,10 @@ const CardStudios = ({ studio }: StudioListItem) => {
             src={studio.image[0]}
           />
           <CardBody className="gap-2">
-            <TextCustom text={studio.name} type="label-lg" />
+            <div className="flex justify-between">
+              <TextCustom text={studio.name} type="label-lg" />
+              <FontAwesomeIcon icon={faBookmark} color={"gainsboro"} />
+            </div>
             <TextCustom
               text={currencyFormat(studio.rent) + "/hour"}
               type="label-md"

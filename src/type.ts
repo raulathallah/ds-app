@@ -21,3 +21,10 @@ export type Review = {
   reviews: string;
   rating: string;
 };
+
+export type User = {
+  username: string;
+  phone: string;
+  email: string;
+  password: string;
+};
