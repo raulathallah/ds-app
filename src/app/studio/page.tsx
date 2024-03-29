@@ -26,6 +26,10 @@ import user from "../_lib/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+export async function generateStaticParams() {
+  return;
+}
+
 const StudioList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { data: studioList, favorite } = useSelector(
@@ -41,6 +45,7 @@ const StudioList = () => {
     dispatch(getCity());
     if (userData) dispatch(getFavoriteStudio(userData.id));
   }, []);
+
   useEffect(() => {
     if (filterCity.length > 0 && search) {
       let sf = studioList.filter((sl) => filterCity.includes(sl.cityId));
