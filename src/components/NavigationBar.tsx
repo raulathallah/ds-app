@@ -16,6 +16,7 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const NavigationBar = () => {
   const userData: User = user();
@@ -25,9 +26,17 @@ const NavigationBar = () => {
     localStorage.clear();
     router.refresh();
   };
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (userData) setIsLoggedIn(true);
+    else setIsLoggedIn(false);
+  }, [userData]);
+
   return (
     <div>
-      <Navbar position="static" shouldHideOnScroll isBordered>
+      <Navbar shouldHideOnScroll isBordered>
         <NavbarBrand>
           <Link color="foreground" href="/">
             <p className="font-bold text-inherit text-xl">D.Space</p>
@@ -50,45 +59,24 @@ const NavigationBar = () => {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent justify="end">
-          {!userData ? (
-            <>
-              <NavbarItem className="hidden lg:flex">
-                <Link href="/auth/login">Login</Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Button
-                  as={Link}
-                  color="primary"
-                  href="/auth/sign-up"
-                  variant="flat"
-                >
-                  Sign Up
-                </Button>
-              </NavbarItem>
-            </>
-          ) : (
-            <Dropdown placement="bottom-end">
-              <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as="button"
-                  className="transition-transform"
-                  color="secondary"
-                  size="sm"
-                />
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-medium">Signed in as</p>
-                  <p className="font-semibold">{userData.username}</p>
-                </DropdownItem>
-                <DropdownItem key="logout" color="danger" onClick={onLogout}>
-                  Log Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          )}
+
+        <NavbarContent justify="end" as={"div"}>
+          <NavbarItem>
+            {!isLoggedIn ? (
+              <Button
+                as={Link}
+                color="primary"
+                href="/auth/login"
+                variant="flat"
+              >
+                Login
+              </Button>
+            ) : (
+              <Button color="danger" variant="flat" onClick={onLogout}>
+                Logout
+              </Button>
+            )}
+          </NavbarItem>
         </NavbarContent>
       </Navbar>
     </div>

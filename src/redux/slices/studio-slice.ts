@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import studioService from "../services/studio-services";
+import { Favorite } from "@/type";
 
 type StudioState = {
   id: number;
@@ -19,10 +20,12 @@ type StudioState = {
 type InitialState = {
   data: StudioState[];
   detail: StudioState | null;
+  favorite: Favorite[];
 };
 const initialState = {
   data: [],
   detail: null,
+  favorite: [],
 } as InitialState;
 
 export const getStudios = createAsyncThunk(
@@ -41,6 +44,17 @@ export const getStudioDetail = createAsyncThunk(
   async (id: string, thunkAPI) => {
     try {
       const data = await studioService.getStudioDetail(id);
+      return data;
+    } catch (error) {
+      throw new Error("ERROR STUDIO SLICE");
+    }
+  }
+);
+export const getFavoriteStudio = createAsyncThunk(
+  "STUDIO_FAVORITE",
+  async (id: number, thunkAPI) => {
+    try {
+      const data = await studioService.getFavoriteStudio(id);
       return data;
     } catch (error) {
       throw new Error("ERROR STUDIO SLICE");
@@ -70,6 +84,15 @@ export const studioSlice = createSlice({
     });
     builder.addCase(getStudioDetail.rejected, (state, action) => {
       state.detail = null;
+    });
+    builder.addCase(getFavoriteStudio.fulfilled, (state, action) => {
+      state.favorite = action.payload;
+    });
+    builder.addCase(getFavoriteStudio.pending, (state, action) => {
+      state.favorite = [];
+    });
+    builder.addCase(getFavoriteStudio.rejected, (state, action) => {
+      state.favorite = [];
     });
   },
 });

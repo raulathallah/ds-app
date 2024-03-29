@@ -23,8 +23,14 @@ export type Review = {
 };
 
 export type User = {
+  id: number;
   username: string;
   phone: string;
   email: string;
   password: string;
+};
+
+export type Favorite = {
+  userId: number;
+  studioId: number;
 };

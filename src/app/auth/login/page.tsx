@@ -19,7 +19,6 @@ const Login = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [tryLogin, setTryLogin] = useState(false);
 
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -37,19 +36,18 @@ const Login = () => {
         password,
       };
       dispatch(login(body));
-      setTryLogin(true);
     }
   };
+
   useEffect(() => {
-    if (!data) {
-      console.log("ERROR LOGIN");
-    } else {
+    if (data) {
       localStorage.setItem("user", JSON.stringify(data));
       router.replace("/");
+    } else {
+      console.log("ERROR LOGIN");
     }
     dispatch(resetAuth());
-    setTryLogin(false);
-  }, [tryLogin]);
+  }, [data]);
 
   return (
     <Card

@@ -1,4 +1,4 @@
-import { Studio } from "@/type";
+import { Favorite, Studio } from "@/type";
 import { Card, CardBody, Chip, Divider, Image, Link } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -9,8 +9,9 @@ import ChipCustom from "./Chip";
 import { blackColor, goldColor } from "@/app/_lib/color";
 type StudioListItem = {
   studio: Studio;
+  favorite: boolean | null;
 };
-const CardStudios = ({ studio }: StudioListItem) => {
+const CardStudios = ({ studio, favorite }: StudioListItem) => {
   return (
     <div>
       <Link href={`/studio/${studio.id}`}>
@@ -31,7 +32,12 @@ const CardStudios = ({ studio }: StudioListItem) => {
           <CardBody className="gap-2">
             <div className="flex justify-between">
               <TextCustom text={studio.name} type="label-lg" />
-              <FontAwesomeIcon icon={faBookmark} color={"gainsboro"} />
+              {favorite !== null && (
+                <FontAwesomeIcon
+                  icon={faBookmark}
+                  color={favorite ? goldColor : "gainsboro"}
+                />
+              )}
             </div>
             <TextCustom
               text={currencyFormat(studio.rent) + "/hour"}
