@@ -96,7 +96,7 @@ const Login = () => {
         <Button color="primary" onClick={onLogin}>
           Login
         </Button>
-        <Link href={"/auth/sign-up"} className="w-full text-sm">
+        <Link href={"/sign-up"} className="w-full text-sm">
           Sign up
         </Link>
       </CardBody>

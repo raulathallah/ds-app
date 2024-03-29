@@ -5,6 +5,7 @@ import { User } from "@/type";
 import {
   Avatar,
   Button,
+  Chip,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -39,36 +40,31 @@ const NavigationBar = () => {
       <Navbar shouldHideOnScroll isBordered>
         <NavbarBrand>
           <Link color="foreground" href="/">
-            <p className="font-bold text-inherit text-xl">D.Space</p>
+            <p className="font-semibold text-inherit text-2xl italic">
+              D.Space
+            </p>
           </Link>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-12" justify="center">
-          <NavbarItem
-            isActive={pathname.includes("/studio")}
-            style={{
-              color: pathname.includes("/studio") ? primaryColor : "black",
-            }}
-          >
-            <Link color="foreground" href="/studio">
-              Studio
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              About Us
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
+
+        {isLoggedIn && (
+          <NavbarContent className="hidden sm:flex gap-12" justify="center">
+            <NavbarItem
+              isActive={pathname.includes("/studio")}
+              style={{
+                color: pathname.includes("/studio") ? primaryColor : "black",
+              }}
+            >
+              <Link color="foreground" href="/studio">
+                Studio
+              </Link>
+            </NavbarItem>
+          </NavbarContent>
+        )}
 
         <NavbarContent justify="end" as={"div"}>
           <NavbarItem>
             {!isLoggedIn ? (
-              <Button
-                as={Link}
-                color="primary"
-                href="/auth/login"
-                variant="flat"
-              >
+              <Button as={Link} color="primary" href="/login" variant="flat">
                 Login
               </Button>
             ) : (

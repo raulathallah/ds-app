@@ -16,12 +16,15 @@ import {
   Checkbox,
   CheckboxGroup,
   Divider,
+  Input,
   Tab,
   Tabs,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import user from "../_lib/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const StudioList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +33,7 @@ const StudioList = () => {
   );
   const { data: cityList } = useSelector((state: RootState) => state.location);
   const userData: User = user();
-
+  const [search, setSearch] = useState("");
   const [filterCity, setFilterCity] = useState<string[]>([]);
   const [studioFiltered, setStudioFiltered] = useState<Studio[]>([]);
   useEffect(() => {
@@ -39,20 +42,46 @@ const StudioList = () => {
     if (userData) dispatch(getFavoriteStudio(userData.id));
   }, []);
   useEffect(() => {
-    if (filterCity.length > 0) {
+    if (filterCity.length > 0 && search) {
       let sf = studioList.filter((sl) => filterCity.includes(sl.cityId));
+      if (search) {
+        let sfs = sf.filter((sfs) =>
+          sfs.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setStudioFiltered(sfs);
+      } else {
+        setStudioFiltered(sf);
+      }
+    } else if (filterCity.length > 0) {
+      let sf = studioList.filter((sl) => filterCity.includes(sl.cityId));
+      setStudioFiltered(sf);
+    } else if (search) {
+      let sf = studioList.filter((sl) =>
+        sl.name.toLowerCase().includes(search.toLowerCase())
+      );
       setStudioFiltered(sf);
     } else {
       setStudioFiltered(studioList);
     }
-  }, [filterCity, studioList]);
+  }, [filterCity, studioList, search]);
 
   return (
     <div className="flex gap-8 ">
       <div className="w-[25%]">
         <Card className="p-4">
           <CardBody>
-            <TextCustom text="Filter" type="label-md" />
+            <div className="flex flex-col justify-between gap-2">
+              <TextCustom text="Filter" type="label-md" />
+              <Input
+                placeholder="Search studio..."
+                size="sm"
+                isClearable
+                onClear={() => setSearch("")}
+                value={search}
+                onValueChange={setSearch}
+                startContent={<FontAwesomeIcon icon={faSearch} />}
+              />
+            </div>
           </CardBody>
           <Divider />
 
@@ -72,71 +101,60 @@ const StudioList = () => {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 w-[75%]">
+      <div className="grid grid-cols-1 gap-2 w-full">
         <Tabs>
           <Tab key="all" title="All">
-            {studioFiltered.length > 0 ? (
-              studioFiltered.map((v, i) => {
-                const isFavorite = () => {
-                  if (favorite.find((f) => f.studioId === v.id)) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                };
-                return (
-                  <div key={v.id}>
-                    <CardStudios
-                      studio={v}
-                      favorite={userData ? isFavorite() : null}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <div className="text-center">
-                <ChipCustom
-                  text="No Studio"
-                  variant="flat"
-                  color="warning"
-                  size="lg"
+            {studioFiltered.map((v, i) => {
+              const isFavorite = () => {
+                if (favorite.find((f) => f.studioId === v.id)) {
+                  return true;
+                } else {
+                  return false;
+                }
+              };
+              return (
+                <CardStudios
+                  key={v.id}
+                  studio={v}
+                  favorite={userData ? isFavorite() : null}
                 />
-              </div>
-            )}
+              );
+            })}
           </Tab>
-          <Tab key="favorite" title="My Favorite">
-            {studioFiltered.length > 0 ? (
-              studioFiltered.map((v, i) => {
-                const isFavorite = () => {
-                  if (favorite.find((f) => f.studioId === v.id)) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                };
+          {userData && (
+            <Tab key="favorite" title="My Favorite">
+              {studioFiltered.length > 0 ? (
+                studioFiltered.map((v, i) => {
+                  const isFavorite = () => {
+                    if (favorite.find((f) => f.studioId === v.id)) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  };
 
-                if (isFavorite()) {
-                  return (
-                    <div key={v.id}>
+                  if (isFavorite()) {
+                    return (
                       <CardStudios
                         studio={v}
+                        key={v.id}
                         favorite={userData ? isFavorite() : null}
                       />
-                    </div>
-                  );
-                }
-              })
-            ) : (
-              <div className="text-center">
-                <ChipCustom
-                  text="No Studio"
-                  variant="flat"
-                  color="warning"
-                  size="lg"
-                />
-              </div>
-            )}
-          </Tab>
+                    );
+                  }
+                })
+              ) : (
+                <div className="text-center">
+                  <ChipCustom
+                    text="No Studio"
+                    variant="flat"
+                    color="warning"
+                    size="lg"
+                  />
+                </div>
+              )}
+            </Tab>
+          )}
         </Tabs>
       </div>
     </div>

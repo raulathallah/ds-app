@@ -8,7 +8,7 @@ export default function StudioLayout({
   return (
     <div className="flex flex-col gap-4">
       <BackButton />
-      <div className="flex flex-col items-center">{children}</div>
+      <div className="flex flex-col">{children}</div>
     </div>
   );
 }
